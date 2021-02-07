@@ -1,14 +1,22 @@
 <template>
   <div class="addNote">
-    <input type="text" />
+    <input type="text" v-model="item.name" />
     <font-awesome-icon
     icon="plus-square"
+    :class="[item.name ? 'active' : 'inactive', 'plus']"
     />
   </div>
 </template>
 
 <script>
 export default {
+  data: function () {
+    return {
+      item: {
+        name: ""
+      }
+    }
+  }
 
 }
 </script>
