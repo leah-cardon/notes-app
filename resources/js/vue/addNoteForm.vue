@@ -1,9 +1,13 @@
 <template>
   <div class="addNote">
-    <input type="text" v-model="item.name" />
+    <div>
+      <input type="text" v-model="item.name" placeholder="Title" />
+      <textarea v-model="item.content" placeholder="Note" />
+    </div>
     <font-awesome-icon
-    icon="plus-square"
-    :class="[item.name ? 'active' : 'inactive', 'plus']"
+      icon="plus-square"
+      @click="addNote()"
+      :class="[item.name ? 'active' : 'inactive', 'plus']"
     />
   </div>
 </template>
@@ -13,26 +17,45 @@ export default {
   data: function () {
     return {
       item: {
-        name: ""
+        name: '',
+        content: ''
       }
     }
-  }
+  },
+  methods: {
+    addNote() {
+      if (this.item.name == '' && this.item.content == '') {
+        return;
+      }
 
+      axios.post('api/item/store', {
+        item: this.item
+      })
+      .then(response => {
+        if (response.status == 201) {
+          this.item.name = '';
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
 }
 </script>
 
 <style scoped>
-.addItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.addNote {
+  display: grid;
+  margin: 0 auto;
+  grid-template-rows: 100px auto;
 }
-input {
+input, textarea {
   background: #f7f7f7;
   border: 0px;
   outline: none;
-  padding: 5px;
-  margin-right: 10px;
+  padding: 0px;
+  margin: 10px 0;
   width: 100%;
 }
 .plus {
