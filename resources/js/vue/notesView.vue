@@ -1,7 +1,7 @@
 <template>
   <div>
     <div f-for="(item, index) in items" :key="index" >
-      <list-item
+      <note-item
         :item="item"
         class="item"
       />

@@ -4,7 +4,7 @@
       <h2 id="title">Notes</h2>
       <add-note-form />
     </div>
-    <notes-view />
+    <notes-view :items="items" />
 
   </div>
 </template>
@@ -16,6 +16,25 @@
     components: {
       addNoteForm,
       notesView
+    },
+    data: function () {
+      return {
+        items: []
+      }
+    },
+    methods: {
+      getNotes() {
+        axios.get('api/items')
+        .then(response => {
+          this.items = response.data
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
+    },
+    created() {
+      this.getNotes();
     }
 
   }
