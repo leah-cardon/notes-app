@@ -7,7 +7,7 @@
     <font-awesome-icon
       icon="plus-square"
       @click="addNote()"
-      :class="[item.name ? 'active' : 'inactive', 'plus']"
+      :class="[item.name && item.content ? 'active' : 'inactive', 'plus']"
     />
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
       .then(response => {
         if (response.status == 201) {
           this.item.name = '';
+          this.item.content = '';
         }
       })
       .catch(err => {
