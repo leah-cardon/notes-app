@@ -1,6 +1,9 @@
 <template>
-  <div>
-    Add Note Form
+  <div class="addNote">
+    <input type="text" />
+    <font-awesome-icon
+    icon="plus-square"
+    />
   </div>
 </template>
 
