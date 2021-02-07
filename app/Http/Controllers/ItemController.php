@@ -76,7 +76,17 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $existingItem = Item::find($id);
+
+        if ($existingItem) {
+          // update name and contents of note
+          $existingItem->name = $request->item['name'];
+          $existingItem->content = $request->item['content'];
+          $existingItem->save();
+          return $existingItem;
+        }
+
+        return 'Item not found.';
     }
 
     /**
