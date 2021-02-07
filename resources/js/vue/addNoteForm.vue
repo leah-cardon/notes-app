@@ -35,4 +35,13 @@ input {
   margin-right: 10px;
   width: 100%;
 }
+.plus {
+  font-size: 20px;
+}
+.active {
+  color: #00CE25;
+}
+.inactive {
+  color: #999999;
+}
 </style>
