@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div f-for="(item, index) in items" :key="index" >
+    <div v-for="(item, index) in items" :key="index" >
       <note-item
         :item="item"
         class="item"
@@ -26,3 +26,4 @@ export default {
   padding: 5px;
   margin-top: 5px;
 }
+</style>
