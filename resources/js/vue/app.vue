@@ -27,7 +27,9 @@
     },
     data: function () {
       return {
-        items: []
+        items: [],
+        currentNote: {},
+        editIsOn: false
       }
     },
     methods: {
