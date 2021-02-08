@@ -30,6 +30,17 @@ export default {
       .catch(err => {
         console.log(err);
       });
+    },
+    deleteNote() {
+      axios.delete('api/item/' + this.item.id)
+      .then(response => {
+        if (response.status == 200) {
+          this.$emit('itemchanged');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     }
   }
 }

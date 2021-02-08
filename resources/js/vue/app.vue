@@ -2,7 +2,9 @@
   <div class="notesListContainer">
     <div class="heading">
       <h2 id="title">Notes</h2>
-      <add-note-form />
+      <add-note-form
+        v-on:reloadlist="getNotes()"
+      />
     </div>
     <notes-view
       :items="items"
