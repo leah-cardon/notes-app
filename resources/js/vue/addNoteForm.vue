@@ -44,7 +44,6 @@ export default {
       if (currentNote.name == '' && currentNote.content == '') {
         return;
       }
-
       axios.post('api/item/store', {
         item: currentNote
       })
