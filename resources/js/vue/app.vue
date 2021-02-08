@@ -2,15 +2,16 @@
   <div class="notesListContainer">
     <div class="heading">
       <h2 id="title">Notes</h2>
+    </div>
+    <div class="listAndForm">
+      <notes-view
+        :items="items"
+        v-on:reloadlist="getNotes()"
+      />
       <add-note-form
         v-on:reloadlist="getNotes()"
       />
     </div>
-    <notes-view
-      :items="items"
-      v-on:reloadlist="getNotes()"
-    />
-
   </div>
 </template>
 
@@ -47,16 +48,19 @@
 
 <style scoped>
   .notesListContainer {
-    width: 350px;
+    width: 60%;
     margin: auto;
+    display: grid;
   }
-
   .heading {
     background: #e6e6e6;
     padding: 10px;
   }
-
   #title {
     text-align: center;
+  }
+  .listAndForm {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
   }
 </style>
