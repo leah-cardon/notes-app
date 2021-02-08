@@ -20,7 +20,7 @@ export default {
   methods: {
     // move to form component and put one here that just changes form to edit mode
     editModeToggle() {
-      this.$emit('turnOnEdit');
+      this.$emit('editIsOn');
     },
     deleteNote() {
       axios.delete('api/item/' + this.item.id)

@@ -5,7 +5,7 @@
         :item="item"
         class="item"
         v-on:itemchanged="$emit('reloadlist')"
-        v-on:turnOnEdit="$emit('editIsOn')"
+        v-on:editIsOn="$emit('turnOnEdit')"
       />
     </div>
   </div>

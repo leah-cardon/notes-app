@@ -14,12 +14,20 @@
         value="item.content"
       />
     </label>
-    <!-- add button that changes back to add mode if in edit mode -->
-    <font-awesome-icon
-      icon="plus-square"
-      @click="addNote()"
-      :class="[item.name && item.content ? 'active' : 'inactive', 'plus']"
-    />
+    <div v-if="editIsOn">
+      <button>Save Changes</button>
+      <button
+        @click="editModeToggle()"
+      >New Note</button>
+    </div>
+    <div v-else>
+      <font-awesome-icon
+        icon="plus-square"
+        @click="addNote()"
+        :class="[item.name && item.content ? 'active' : 'inactive', 'plus']"
+      />
+    </div>
+
   </div>
 </template>
 
@@ -33,7 +41,13 @@ export default {
       }
     }
   },
+  props: {
+    editIsOn: Boolean
+  },
   methods: {
+    editModeToggle() {
+      this.$emit('turnOffEdit');
+    },
     addNote() {
       if (this.item.name == '' && this.item.content == '') {
         return;
