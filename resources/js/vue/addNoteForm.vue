@@ -51,6 +51,7 @@ export default {
       .then(response => {
         if (response.status == 201) {
           this.$emit('reloadlist');
+          this.editModeToggle();
         }
       })
       .catch(err => {
