@@ -2,14 +2,14 @@
   <div class="addNote">
     <label for="title">Title
       <input type="text"
-        v-model="item.name"
+        v-model="currentNote.name"
         id="title"
         value="item.name"
       />
     </label>
     <label for="content">Note
       <textarea
-        v-model="item.content"
+        v-model="currentNote.content"
         id="content"
         value="item.content"
       />
@@ -33,6 +33,10 @@
 
 <script>
 export default {
+  props: {
+    editIsOn: Boolean,
+    currentNote: {}
+  },
   data: function () {
     return {
       item: {
@@ -40,9 +44,6 @@ export default {
         content: ''
       }
     }
-  },
-  props: {
-    editIsOn: Boolean
   },
   methods: {
     editModeToggle() {
