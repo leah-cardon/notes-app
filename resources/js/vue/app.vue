@@ -4,7 +4,10 @@
       <h2 id="title">Notes</h2>
       <add-note-form />
     </div>
-    <notes-view :items="items" />
+    <notes-view
+      :items="items"
+      v-on:reloadlist="getNotes()"
+    />
 
   </div>
 </template>
