@@ -18,6 +18,7 @@
 export default {
   props: ['item'],
   methods: {
+    // move to form component and put one here that just changes form to edit mode
     updateNote() {
       axios.put('api/item/' + this.item.id, {
         item: this.item

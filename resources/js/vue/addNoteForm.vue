@@ -1,23 +1,20 @@
 <template>
   <div class="addNote">
-    <div>
-      <label for="title">Title
-        <input type="text"
-          v-model="item.name"
-          id="title"
-          value="item.name"
-        />
-      </label>
-    </div>
-    <div>
-      <label for="content">Note
-        <textarea
-          v-model="item.content"
-          id="content"
-          value="item.content"
-        />
-      </label>
-    </div>
+    <label for="title">Title
+      <input type="text"
+        v-model="item.name"
+        id="title"
+        value="item.name"
+      />
+    </label>
+    <label for="content">Note
+      <textarea
+        v-model="item.content"
+        id="content"
+        value="item.content"
+      />
+    </label>
+    <!-- add button that changes back to add mode if in edit mode -->
     <font-awesome-icon
       icon="plus-square"
       @click="addNote()"
