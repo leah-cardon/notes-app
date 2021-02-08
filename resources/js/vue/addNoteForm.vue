@@ -35,6 +35,7 @@ export default {
         if (response.status == 201) {
           this.item.name = '';
           this.item.content = '';
+          this.$emit('reloadlist');
         }
       })
       .catch(err => {

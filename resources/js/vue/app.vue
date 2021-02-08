@@ -2,9 +2,14 @@
   <div class="notesListContainer">
     <div class="heading">
       <h2 id="title">Notes</h2>
-      <add-note-form />
+      <add-note-form
+        v-on:reloadlist="getNotes()"
+      />
     </div>
-    <notes-view />
+    <notes-view
+      :items="items"
+      v-on:reloadlist="getNotes()"
+    />
 
   </div>
 </template>
@@ -16,6 +21,25 @@
     components: {
       addNoteForm,
       notesView
+    },
+    data: function () {
+      return {
+        items: []
+      }
+    },
+    methods: {
+      getNotes() {
+        axios.get('api/items')
+        .then(response => {
+          this.items = response.data
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
+    },
+    created() {
+      this.getNotes();
     }
 
   }
