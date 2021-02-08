@@ -52,7 +52,20 @@ export default {
       .catch(err => {
         console.log(err);
       })
-    }
+    },
+    updateNote() {
+      axios.put('api/item/' + this.item.id, {
+        item: this.item
+      })
+      .then(response => {
+        if (response.status == 200) {
+          this.$emit('itemchanged');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    },
   }
 }
 </script>

@@ -19,18 +19,8 @@ export default {
   props: ['item'],
   methods: {
     // move to form component and put one here that just changes form to edit mode
-    updateNote() {
-      axios.put('api/item/' + this.item.id, {
-        item: this.item
-      })
-      .then(response => {
-        if (response.status == 200) {
-          this.$emit('itemchanged');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    editModeToggle() {
+
     },
     deleteNote() {
       axios.delete('api/item/' + this.item.id)

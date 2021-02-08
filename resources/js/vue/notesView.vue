@@ -4,6 +4,7 @@
       <note-item
         :item="item"
         class="item"
+        <!-- add click event handler here that puts the right item into state as the current item -->
         v-on:itemchanged="$emit('reloadlist')"
       />
     </div>
