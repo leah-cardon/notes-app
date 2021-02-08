@@ -7,6 +7,7 @@
       <notes-view
         :items="items"
         v-on:reloadlist="getNotes()"
+        v-on:editIsOn="toggleEdit(true)"
       />
       <!-- if edit mode is on, display title and content fields with a save button and a button to switch back to new note -->
       <!-- if it's off (by default), show the new note form which includes the + -->
@@ -33,6 +34,9 @@
       }
     },
     methods: {
+      toggleEdit(bool) {
+        this.editIsOn = bool;
+      },
       getNotes() {
         axios.get('api/items')
         .then(response => {

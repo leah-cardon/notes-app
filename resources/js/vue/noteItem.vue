@@ -5,7 +5,7 @@
     <!-- CHANGE THIS:
     edit button opens the text for editing
     a save button sends the updateNote (put request) -->
-    <button @click="updateNote()" class="edit">
+    <button @click="editModeToggle()" class="edit">
       <font-awesome-icon icon="edit" />
     </button>
     <button @click="deleteNote()" class="trashcan">
@@ -20,7 +20,7 @@ export default {
   methods: {
     // move to form component and put one here that just changes form to edit mode
     editModeToggle() {
-
+      this.$emit('turnOnEdit');
     },
     deleteNote() {
       axios.delete('api/item/' + this.item.id)
