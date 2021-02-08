@@ -15,7 +15,6 @@ export default {
   props: ['item'],
   methods: {
     editModeToggle(item) {
-      // turns on edit mode and puts the current item into app level state
       this.$emit('editIsOn', item);
     },
     deleteNote() {
@@ -35,10 +34,12 @@ export default {
 
 <style scoped>
 .titleText {
-  font-size: 40px;
+  font-size: 25px;
+  font-family: 'Arial';
 }
 .noteText {
   font-size: 12px;
+  font-family: 'Arial';
 }
 .item {
   display: flex;

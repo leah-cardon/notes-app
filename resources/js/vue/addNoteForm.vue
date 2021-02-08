@@ -78,7 +78,7 @@ export default {
 .addNote {
   display: grid;
   margin: 0 auto;
-  grid-template-rows: 1fr 5fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
   border: 1px white solid;
   width: 100%;
 }
@@ -89,6 +89,10 @@ input, textarea {
   padding: 0px;
   margin: 10px 0;
   width: 100%;
+  font-family: 'Arial';
+}
+label {
+  font-family: 'Arial';
 }
 .plus {
   font-size: 20px;

@@ -77,6 +77,7 @@
   }
   #title {
     text-align: center;
+    font-family: 'Arial';
   }
   .listAndForm {
     display: grid;
