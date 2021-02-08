@@ -3,8 +3,9 @@
     <div>
       <label for="title">Title
         <input type="text"
-          id="title"
           v-model="item.name"
+          id="title"
+          value="item.name"
         />
       </label>
     </div>
@@ -12,8 +13,8 @@
       <label for="content">Note
         <textarea
           v-model="item.content"
-          placeholder="Note"
           id="content"
+          value="item.content"
         />
       </label>
     </div>
