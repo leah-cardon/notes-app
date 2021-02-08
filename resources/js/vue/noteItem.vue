@@ -1,11 +1,7 @@
 <template>
   <div class="item">
     <div class="titleText">{{ item.name }}</div>
-    <div class="noteText">{{ item.content }}</div>
-    <!-- CHANGE THIS:
-    edit button opens the text for editing
-    a save button sends the updateNote (put request) -->
-    <button @click="updateNote()" class="edit">
+    <button :item="item" @click="editModeToggle(item)" class="edit">
       <font-awesome-icon icon="edit" />
     </button>
     <button @click="deleteNote()" class="trashcan">
@@ -18,18 +14,9 @@
 export default {
   props: ['item'],
   methods: {
-    updateNote() {
-      axios.put('api/item/' + this.item.id, {
-        item: this.item
-      })
-      .then(response => {
-        if (response.status == 200) {
-          this.$emit('itemchanged');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    editModeToggle(item) {
+      // turns on edit mode and puts the current item into app level state
+      this.$emit('editIsOn', item);
     },
     deleteNote() {
       axios.delete('api/item/' + this.item.id)

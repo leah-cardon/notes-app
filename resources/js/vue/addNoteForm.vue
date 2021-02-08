@@ -1,47 +1,75 @@
 <template>
   <div class="addNote">
-    <div>
-      <input type="text" v-model="item.name" placeholder="Title" />
-      <textarea v-model="item.content" placeholder="Note" />
+    <label for="title">Title
+      <input type="text"
+        v-model="currentNote.name"
+        id="title"
+      />
+    </label>
+    <label for="content">Note
+      <textarea
+        v-model="currentNote.content"
+        id="content"
+      />
+    </label>
+    <div v-if="editIsOn">
+      <button
+        @click="updateNote(currentNote)">Save Changes</button>
+      <button
+        @click="editModeToggle()"
+      >New Note</button>
     </div>
-    <font-awesome-icon
-      icon="plus-square"
-      @click="addNote()"
-      :class="[item.name && item.content ? 'active' : 'inactive', 'plus']"
-    />
+    <div v-else>
+      <font-awesome-icon
+        icon="plus-square"
+        @click="addNote(currentNote)"
+        :class="[currentNote.name && currentNote.content ? 'active' : 'inactive', 'plus']"
+      />
+    </div>
+
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
-    return {
-      item: {
-        name: '',
-        content: ''
-      }
-    }
+  props: {
+    editIsOn: Boolean,
+    currentNote: {}
   },
   methods: {
-    addNote() {
-      if (this.item.name == '' && this.item.content == '') {
+    editModeToggle() {
+      this.$emit('turnOffEdit');
+    },
+    addNote(currentNote) {
+      if (currentNote.name == '' && currentNote.content == '') {
         return;
       }
-
       axios.post('api/item/store', {
-        item: this.item
+        item: currentNote
       })
       .then(response => {
         if (response.status == 201) {
-          this.item.name = '';
-          this.item.content = '';
           this.$emit('reloadlist');
+          this.editModeToggle();
         }
       })
       .catch(err => {
         console.log(err);
       })
-    }
+    },
+    updateNote(currentNote) {
+      axios.put('api/item/' + currentNote.id, {
+        item: currentNote
+      })
+      .then(response => {
+        if (response.status == 200) {
+          this.$emit('itemchanged');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    },
   }
 }
 </script>
@@ -50,7 +78,9 @@ export default {
 .addNote {
   display: grid;
   margin: 0 auto;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 1fr 5fr 1fr;
+  border: 1px white solid;
+  width: 100%;
 }
 input, textarea {
   background: #f7f7f7;

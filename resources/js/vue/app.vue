@@ -2,15 +2,20 @@
   <div class="notesListContainer">
     <div class="heading">
       <h2 id="title">Notes</h2>
-      <add-note-form
+    </div>
+    <div class="listAndForm">
+      <notes-view
+        :items="items"
         v-on:reloadlist="getNotes()"
+        v-on:turnOnEdit="toggleEdit(true, $event)"
+      />
+      <add-note-form
+        :current-note="currentNote"
+        :edit-is-on="editIsOn"
+        v-on:reloadlist="getNotes()"
+        v-on:turnOffEdit="toggleEdit(false, null)"
       />
     </div>
-    <notes-view
-      :items="items"
-      v-on:reloadlist="getNotes()"
-    />
-
   </div>
 </template>
 
@@ -24,10 +29,25 @@
     },
     data: function () {
       return {
-        items: []
+        items: [],
+        currentNote: {},
+        editIsOn: false
       }
     },
     methods: {
+      toggleEdit(bool, item) {
+        this.editIsOn = bool;
+        if (item) {
+          this.currentNote = item;
+        }
+        if (!bool) {
+          this.currentNote = {
+            name: '',
+            content: ''
+          };
+        }
+        this.$forceUpdate();
+      },
       getNotes() {
         axios.get('api/items')
         .then(response => {
@@ -47,16 +67,19 @@
 
 <style scoped>
   .notesListContainer {
-    width: 350px;
+    width: 60%;
     margin: auto;
+    display: grid;
   }
-
   .heading {
     background: #e6e6e6;
     padding: 10px;
   }
-
   #title {
     text-align: center;
+  }
+  .listAndForm {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
   }
 </style>

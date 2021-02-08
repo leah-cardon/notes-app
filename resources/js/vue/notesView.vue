@@ -5,10 +5,13 @@
         :item="item"
         class="item"
         v-on:itemchanged="$emit('reloadlist')"
+        v-on:editIsOn="$emit('turnOnEdit', $event)"
       />
     </div>
   </div>
 </template>
+
+<!-- add click event handler in note-item above that puts the right item into state as the current item, and move itemchanged event to form component -->
 
 <script>
 import noteItem from './noteItem'
