@@ -1,8 +1,21 @@
 <template>
   <div class="addNote">
     <div>
-      <input type="text" v-model="item.name" placeholder="Title" />
-      <textarea v-model="item.content" placeholder="Note" />
+      <label for="title">Title
+        <input type="text"
+          id="title"
+          v-model="item.name"
+        />
+      </label>
+    </div>
+    <div>
+      <label for="content">Note
+        <textarea
+          v-model="item.content"
+          placeholder="Note"
+          id="content"
+        />
+      </label>
     </div>
     <font-awesome-icon
       icon="plus-square"
@@ -50,7 +63,9 @@ export default {
 .addNote {
   display: grid;
   margin: 0 auto;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 1fr 5fr 1fr;
+  border: 1px white solid;
+  width: 100%;
 }
 input, textarea {
   background: #f7f7f7;
