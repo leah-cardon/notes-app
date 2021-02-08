@@ -4,18 +4,17 @@
       <input type="text"
         v-model="currentNote.name"
         id="title"
-        value="item.name"
       />
     </label>
     <label for="content">Note
       <textarea
         v-model="currentNote.content"
         id="content"
-        value="item.content"
       />
     </label>
     <div v-if="editIsOn">
-      <button>Save Changes</button>
+      <button
+        @click="updateNote(currentNote)">Save Changes</button>
       <button
         @click="editModeToggle()"
       >New Note</button>
@@ -23,8 +22,8 @@
     <div v-else>
       <font-awesome-icon
         icon="plus-square"
-        @click="addNote()"
-        :class="[item.name && item.content ? 'active' : 'inactive', 'plus']"
+        @click="addNote(currentNote)"
+        :class="[currentNote.name && currentNote.content ? 'active' : 'inactive', 'plus']"
       />
     </div>
 
@@ -37,30 +36,20 @@ export default {
     editIsOn: Boolean,
     currentNote: {}
   },
-  data: function () {
-    return {
-      item: {
-        name: '',
-        content: ''
-      }
-    }
-  },
   methods: {
     editModeToggle() {
       this.$emit('turnOffEdit');
     },
-    addNote() {
-      if (this.item.name == '' && this.item.content == '') {
+    addNote(currentNote) {
+      if (currentNote.name == '' && currentNote.content == '') {
         return;
       }
 
       axios.post('api/item/store', {
-        item: this.item
+        item: currentNote
       })
       .then(response => {
         if (response.status == 201) {
-          this.item.name = '';
-          this.item.content = '';
           this.$emit('reloadlist');
         }
       })
@@ -68,9 +57,9 @@ export default {
         console.log(err);
       })
     },
-    updateNote() {
-      axios.put('api/item/' + this.item.id, {
-        item: this.item
+    updateNote(currentNote) {
+      axios.put('api/item/' + currentNote.id, {
+        item: currentNote
       })
       .then(response => {
         if (response.status == 200) {

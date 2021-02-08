@@ -1,10 +1,6 @@
 <template>
   <div class="item">
     <div class="titleText">{{ item.name }}</div>
-    <div class="noteText">{{ item.content }}</div>
-    <!-- CHANGE THIS:
-    edit button opens the text for editing
-    a save button sends the updateNote (put request) -->
     <button :item="item" @click="editModeToggle(item)" class="edit">
       <font-awesome-icon icon="edit" />
     </button>

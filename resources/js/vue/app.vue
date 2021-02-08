@@ -40,6 +40,12 @@
         if (item) {
           this.currentNote = item;
         }
+        if (!bool) {
+          this.currentNote = {
+            name: '',
+            content: ''
+          };
+        }
         this.$forceUpdate();
       },
       getNotes() {
